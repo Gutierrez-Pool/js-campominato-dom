@@ -38,6 +38,9 @@ function play() {
     gridElement.innerHTML = "";
 
 
+    const bombs = getRandomNumbersArray(16, cellNumber);
+    console.log (bombs);
+
 
     for (let i = 0; i < cellNumber; i++) {
 
@@ -51,17 +54,21 @@ function play() {
 
         gridElement.append (newElement);
 
-        newElement.addEventListener("click", clickManager);
+        newElement.addEventListener("click", function() {
+
+            console.log(this.innerText);
+
+            if (bombs.includes(Number(this.innerText))) {
+
+                console.log("bomba");
+                this.classList.add("bomb");
+
+            }
+
+            this.classList.add("clicked");
+
+        });
     }
-}
-
-
-function clickManager() {
-
-    console.log(this.innerText);
-
-    this.classList.add("clicked");
-
 }
 
 
@@ -83,7 +90,7 @@ function getRandomNumbersArray (quantity, highestNumber) {
     let iterazioni = 0;
 
     do {
-        const newNumber = getRandomNumber (highestNumber);
+        const newNumber = generateRandomNumber(highestNumber);
 
         if ( ! numbersArray.includes(newNumber)) {
 

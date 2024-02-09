@@ -48,3 +48,8 @@ header {
     color: #000a2a;
     font-weight: bold;
 }
+
+#grid .cell.bomb {
+    background-color: #8e0b2a;
+    color: white;
+}
