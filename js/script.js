@@ -1,11 +1,12 @@
-// Consegna
+// Il computer deve generare 16 numeri casuali e inserirli in un array, in base al range della difficoltà prescelta (se abbiamo scelto facile l'array conterrà numeri casuali da 1 a 100, se invece abbiamo scelto difficile l'array dovrà contenerne da 1 a 49): questi rappreseranno le posizioni delle nostre bombe.
 
-// L'utente clicca su un bottone che genererà una griglia di gioco quadrata.
-// Ogni cella ha un numero progressivo, da 1 a 100.
-// Ci saranno quindi 10 caselle per ognuna delle 10 righe.
-// Quando l'utente clicca su ogni cella, la cella cliccata si colora di azzurro ed emetto un messaggio in console con il numero della cella cliccata.
-// Potete realizzare lo stile che volete, sin quando tutto è leggibile con facilità.
+// Attenzione: nella stessa cella può essere posizionata al massimo una bomba, perciò nell’array delle bombe non potranno esserci due numeri uguali.
 
+// In seguito l'utente clicca su una cella: se il numero è presente nella lista dei numeri generati - abbiamo calpestato una bomba - la cella si colora di rosso e la partita termina. Altrimenti la cella cliccata si colora di azzurro e l'utente può continuare a cliccare sulle altre celle.
+
+// La partita termina quando il giocatore clicca su una bomba o quando raggiunge il numero massimo possibile di numeri consentiti (ovvero quando ha rivelato tutte le celle che non sono bombe).
+
+// Al termine della partita il software deve comunicare il punteggio, cioè il numero di volte che l’utente ha cliccato su una cella che non era una bomba.
 
 const playButton = document.querySelector("#play-button");
 
@@ -14,7 +15,7 @@ playButton.addEventListener("click", play);
 
 
 function play() {
-
+    
     const gridElement = document.querySelector("#grid");
 
     let cellNumber;
@@ -30,11 +31,12 @@ function play() {
         cellNumber = 49;
     }
     
+    // griglia in base alla difficolta
     gridElement.className = selectElement.value;
     
+    // reset griglia
     gridElement.innerHTML = "";
 
-    // gridElement.style.display = "flex";
 
 
     for (let i = 0; i < cellNumber; i++) {
@@ -54,7 +56,6 @@ function play() {
 }
 
 
-
 function clickManager() {
 
     console.log(this.innerText);
@@ -65,30 +66,34 @@ function clickManager() {
 
 
 
-// playButton.addEventListener("click",
-//     function() {
-
-//         for (let i = 1; i <= 100; i++) {
-        
-//             // Griglia
-//             const newElement = document.createElement("div");
-//             newElement.innerText = i;
-//             newElement.classList.add ("square");
-//             newElement.classList.add ("ratio", "ratio-1x1");
-            
-//             gridElement.append(newElement);
-            
-
-//             // Colore
-//             newElement.addEventListener ("click", 
-//                 function () {
-                
-//                     this.classList.add ("active");
-                
-//                     console.log (i);
-//                 }
-//             )
-//         } 
-//     }
-// )
+// Funzione che genera un numero random
+function generateRandomNumber(max) {
     
+    const randomNumber = Math.floor(Math.random() * max + 1);
+    
+    // restituisco il numero generato
+    return randomNumber;
+}
+
+
+function getRandomNumbersArray (quantity, highestNumber) {
+
+    const numbersArray = [];
+
+    let iterazioni = 0;
+
+    do {
+        const newNumber = getRandomNumber (highestNumber);
+
+        if ( ! numbersArray.includes(newNumber)) {
+
+            numbersArray.push(newNumber);
+
+        }
+
+        iterazioni++;
+
+    } while (numbersArray.length < quantity && iterazioni < 100);
+
+    return numbersArray;
+}

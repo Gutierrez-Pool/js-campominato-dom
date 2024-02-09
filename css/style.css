@@ -10,7 +10,6 @@ body {
     background-color: #011627;
 }
 
-
 header {
     background-color: #132e50;
 }
@@ -28,8 +27,6 @@ header {
     justify-content: center;
     align-items: center;
 
-    /* width: calc(100% / 10 - 1px / 10 * 9); */
-
     border: white 1px solid;
     color: #7fffd4;
 }
@@ -46,8 +43,8 @@ header {
     width: calc(100% / 7 - 1px / 7 * 6);
 }
 
-.square.active {
+#grid .cell.clicked {
     background-color: #7fffd4;
-    color: #011627;
+    color: #000a2a;
     font-weight: bold;
 }
